@@ -1,0 +1,19 @@
+﻿@model QuizApp.Models.Player
+
+@{
+    ViewData["Title"] = "Result Page";
+}
+
+<div class="container">
+    <h1>@ViewBag.PlayerName, your quiz result:</h1>
+    <h2>Your Score: @ViewBag.Score</h2>
+    @if (ViewBag.Score >= 70)
+    {
+        <h3>Congratulations! You won!</h3>
+    }
+    else
+    {
+        <h3>Sorry, you lost. Better luck next time!</h3>
+    }
+    <a href="@Url.Action("StartQuiz", "Game")" class="btn btn-primary">Return to Quiz</a>
+</div>

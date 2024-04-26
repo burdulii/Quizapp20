@@ -1,0 +1,42 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Questions List";
+}
+@model List<Question>
+<div class="container">
+    <div class="col-md-15">
+        <h2 class="mb-4">Questions</h2>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th></th>
+                    <th>Question</th>
+                    <th>Answers</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @for(int i = 0; i < Model.Count; i++)
+                {
+                    <tr>
+                        <td>@(i+1)</td>
+                        <td style="width: 50%;">@Model[i].QuestionText</td>
+                        <td style="width: 50%;">
+                            @foreach (var answer in Model[i].Answers)
+                            {
+                                <p>@answer.IsCorrect - @answer.AnswerText</p>
+                            }
+                        </td>
+                        <td><form asp-controller="Questions" asp-action="DeleteQuestion" method="post">
+                                <input type="hidden" name="id" value="@Model[i].Id" />
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
